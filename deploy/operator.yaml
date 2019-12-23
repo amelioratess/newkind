@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-ope
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: react-ope
+  template:
+    metadata:
+      labels:
+        name: react-ope
+    spec:
+      serviceAccountName: react-ope
+      containers:
+        - name: react-ope
+          # Replace this with the built image name
+          image: kshitizsh12/react
+          command:
+          - react-ope
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "react-ope"

@@ -1,0 +1,19 @@
+apiVersion: app.example.com/v1alpha1
+kind: React
+metadata:
+  name: example-react
+spec:
+  # Add fields here
+  replicas: 4
+  memory:
+    request: 128Mi
+    limit: 256Mi
+  cpu:
+    request: 300m
+    limit: 2000m
+  containers:
+      - name: docker-react
+        image: kshitizsh12/docker-react
+        ports:
+        - containerPort: 80
+
